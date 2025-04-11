@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tsx index.ts"
+    "start": "tsx src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -11,10 +11,12 @@
   "description": "",
   "devDependencies": {
     "@types/node": "^22.14.0",
+    "prisma": "^6.6.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@prisma/client": "^6.6.0",
     "@types/express": "^5.0.1",
     "express": "^5.1.0"
   }
