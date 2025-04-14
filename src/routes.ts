@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { adminRouter } from "./routes/admin.router";
 
 const router = Router();
 
@@ -8,4 +9,8 @@ router.get("/health", (req,res)=>{
     })
 })
 
-export {router};
+router.use("/admin",adminRouter);
+
+export {
+    router as apiRouter
+};
