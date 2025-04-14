@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { adminRouter } from "./routes/admin.router";
+import { galleryRouter } from "./routes/gallery.router";
 
 const router = Router();
 
@@ -10,6 +11,7 @@ router.get("/health", (req,res)=>{
 })
 
 router.use("/admin",adminRouter);
+router.use("/gallery",galleryRouter);
 
 export {
     router as apiRouter
