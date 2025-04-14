@@ -2,16 +2,18 @@ import { Request, Response } from "express";
 
 import Exception from "../../entities/Exception";
 
+import listImagesServices from "../../services/gallery/listImages.service";
+
 export default async function listImagesController(req: Request, res:Response){
     try{
         const body = req.body;
 
         const userId: string = body.userId;
 
-        //callService
+        const images = await listImagesServices(userId);
 
         res.status(200).json({
-            data: []
+            data: images
         })
     }catch(error:any){
         let errorStatus = 500;
