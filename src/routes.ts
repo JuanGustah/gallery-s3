@@ -4,6 +4,8 @@ import { adminRouter } from "./routes/admin.router";
 import { galleryRouter } from "./routes/gallery.router";
 import { authRouter } from "./routes/auth.router";
 
+import { mustBeLogged } from "./middlewares/logged.middleware";
+
 const router = Router();
 
 router.get("/health", (req,res)=>{
@@ -13,7 +15,7 @@ router.get("/health", (req,res)=>{
 })
 
 router.use("/admin", adminRouter);
-router.use("/gallery", galleryRouter);
+router.use("/gallery", mustBeLogged, galleryRouter);
 router.use("/auth",authRouter);
 
 export {
