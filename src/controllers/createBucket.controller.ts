@@ -1,14 +1,17 @@
 import { Request, Response } from "express";
+
 import Exception from "../entities/Exception";
+
+import createBucketService from "../services/createBucket.service";
 
 export default async function createBucketController(req:Request, res: Response) {
     try{
         const body = req.body;
 
-        //call service
+        const {location} = await createBucketService(body.bucketName as string);
 
         res.status(200).json({
-            message: "bucket created"
+            message: `bucket created on location ${location}`
         })
     }catch(error: any){
         let errorStatus = 500;
