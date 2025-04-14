@@ -31,7 +31,8 @@ export default async function loginService(authorizationHeader:string){
 
     const token = jwt.sign(
         {
-            username: JSON.stringify(username) 
+            username: JSON.stringify(username),
+            userId: user.id
         },
         secretKey,
         { expiresIn: '60m' }

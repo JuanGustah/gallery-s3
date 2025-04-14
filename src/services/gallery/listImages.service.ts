@@ -1,8 +1,13 @@
 import { ListObjectsCommand, S3ServiceException } from "@aws-sdk/client-s3";
+
+import jwt from "jsonwebtoken";
+
 import { s3 } from "../../infra/aws/s3";
-import Exception from "../../entities/Exception";
+
 import { getObjectS3Name } from "../../helpers/getObjectS3Name.helper";
 import { checkIfObjectIsImage } from "../../helpers/checkObjectMimetype.helper";
+
+import Exception from "../../entities/Exception";
 
 type GalleryImage = {
     id: string | undefined,
@@ -11,10 +16,14 @@ type GalleryImage = {
     lastModified: Date | undefined
 }
 
-export default async function listImagesServices(userId: string){
+export default async function listImagesServices(token: string){
     try{
         let images: GalleryImage[] = [];
-        const s3BucketName = process.env.S3_BUCKET_URL;
+        const s3BucketName = process.env.S3_BUCKET_URL!;
+        const secretKey = process.env.JWT_SECRET!;
+
+        const tokenDecoded:any = jwt.verify(token,secretKey);
+        const userId = tokenDecoded.userId;
 
         const command = new ListObjectsCommand({
             Bucket: s3BucketName,

@@ -6,11 +6,10 @@ import listImagesServices from "../../services/gallery/listImages.service";
 
 export default async function listImagesController(req: Request, res:Response){
     try{
-        const body = req.body;
+        const headers = req.headers;
+        const token = headers.authorization?.split(" ")[1]!;
 
-        const userId: string = body.userId;
-
-        const images = await listImagesServices(userId);
+        const images = await listImagesServices(token);
 
         res.status(200).json({
             data: images
